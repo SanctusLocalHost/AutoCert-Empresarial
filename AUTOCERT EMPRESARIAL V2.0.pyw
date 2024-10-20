@@ -35,7 +35,7 @@ def salvar_relatorio():
 
     # Definir o caminho do template e da pasta de certificados
     script_directory = os.path.dirname(os.path.abspath(__file__))
-    template_path = os.path.join(script_directory, "TEMPLATE_CERTIFICADO_MOBENSANI.xltm")  # Usar o template .xltm
+    template_path = os.path.join(script_directory, "TEMPLATE_CERTIFICADO_EMPRESARIAL.xltm")  # Usar o template .xltm
     output_directory = os.path.join(script_directory, "Certificados_Gerados")
 
     # Verificar se o template existe
@@ -61,7 +61,7 @@ def salvar_relatorio():
         try:
             # Carregar o template
             workbook = excel.Workbooks.Open(template_path)
-            worksheet = workbook.Worksheets("MOBENSANI")
+            worksheet = workbook.Worksheets("EMPRESARIAL")
 
             # Inserir a data de faturamento e número da nota nas células especificadas
             worksheet.Range("G3").Value = numero_nota
@@ -112,17 +112,17 @@ def salvar_relatorio():
             os.remove(file_path)
 
     # Criar um arquivo .zip com os PDFs
-    zip_file_name = f"CERTIFICADO MOBENSANI NF {numero_nota}.zip"
+    zip_file_name = f"CERTIFICADO EMPRESARIAL NF {numero_nota}.zip"
     zip_file_path = os.path.join(output_directory, zip_file_name)
     with zipfile.ZipFile(zip_file_path, 'w') as zipf:
         for pdf_file in arquivos_pdf:
             zipf.write(pdf_file, os.path.basename(pdf_file))
 
-    messagebox.showinfo("Sucesso", f"CERTIFICADOS DIGITAIS MOBENSANI GERADOS COM SUCESSO!!!")
+    messagebox.showinfo("Sucesso", f"CERTIFICADOS DIGITAIS EMPRESARIAL GERADOS COM SUCESSO!!!")
 
 # Configurações da Interface Gráfica
 root = tk.Tk()
-root.title("AutoCert Mobensani V2.0")
+root.title("AutoCert Empresarial V2.0")
 
 # Botão para carregar o arquivo .xlsx
 btn_carregar = tk.Button(root, text="IMPORTE O DOC. SAÍDA", command=carregar_arquivo)
